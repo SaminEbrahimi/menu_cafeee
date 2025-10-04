@@ -1,193 +1,130 @@
-<!doctype html>
-<html lang="fa" dir="rtl">
+<!DOCTYPE html>
+<html lang="fa">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Dr Coffee - منوی دیجیتال</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dr Coffee Menu</title>
   <style>
     body {
       margin: 0;
-      font-family: "Tahoma", sans-serif;
-      background: #f8f6f3;
-      color: #333;
-      line-height: 1.6;
+      font-family: 'Tahoma', sans-serif;
+      background-color: #2f2f2f; /* نوک مدادی */
+      color: #fff;
+      direction: rtl; /* منو سمت راست باشه */
     }
-
-    /* هدر */
-    .hero {
-      position: relative;
-      height: 250px;
-      background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+    .welcome {
+      height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+      background: url('https://images.unsplash.com/photo-1509042239860-f550ce710b93') center/cover no-repeat;
+    }
+    .welcome h1 {
+      font-family: "Times New Roman", serif;
+      font-size: 48px;
       color: #fff;
-      text-align: center;
+      text-shadow: 2px 2px 6px black;
+      background: rgba(0,0,0,0.6);
+      padding: 20px 40px;
+      border-radius: 15px;
     }
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-    }
-    .hero-content {
-      position: relative;
-      z-index: 1;
-    }
-    .hero h1 {
-      font-size: 32px;
-      margin: 0;
-      letter-spacing: 2px;
-    }
-
-    /* ناوبری */
-    .navbar {
+    .menu-container {
+      display: none;
+      padding: 20px;
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      background: #3c2a21;
-      padding: 12px;
+      gap: 30px;
     }
-    .navbar a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color .2s;
-    }
-    .navbar a:hover {
-      color: #d2b48c;
-    }
-
-    /* منو */
-    .menu {
-      max-width: 900px;
-      margin: 30px auto;
-      padding: 0 15px;
-    }
-    .category {
-      margin-bottom: 40px;
-    }
-    .category h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #3c2a21;
-      border-bottom: 2px solid #d2b48c;
-      display: inline-block;
-      padding-bottom: 4px;
-    }
-    .items {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    .menu-titles {
+      width: 200px;
+      display: flex;
+      flex-direction: column;
       gap: 15px;
     }
-    .item {
-      background: #fff;
+    .menu-btn {
+      padding: 15px;
+      background: #444;
+      border: none;
+      border-radius: 10px;
+      font-size: 18px;
+      color: #fff;
+      cursor: pointer;
+      text-align: right;
+      transition: 0.3s;
+    }
+    .menu-btn:hover {
+      background: #8b4513;
+    }
+    .menu-section {
+      flex: 1;
+      background: #3a3a3a;
       border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      overflow: hidden;
-      transition: transform .2s;
+      padding: 20px;
+      display: none;
     }
-    .item:hover { transform: translateY(-5px); }
-    .item img {
-      width: 100%;
-      height: 160px;
-      object-fit: cover;
+    .menu-section h2 {
+      border-bottom: 2px solid #8b4513;
+      padding-bottom: 10px;
     }
-    .info { padding: 12px; }
-    .info h3 {
-      margin: 0;
-      font-size: 16px;
-      color: #3c2a21;
+    .menu-section ul {
+      list-style: none;
+      padding: 0;
+      margin-top: 20px;
     }
-    .info p {
-      margin: 6px 0;
-      font-size: 13px;
-      color: #666;
-    }
-    .price {
-      font-weight: bold;
-      color: #b22222;
-      margin-top: 8px;
-      font-size: 14px;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 13px;
-      color: #666;
-      margin: 30px 0 10px;
+    .menu-section li {
+      font-size: 20px;
+      margin: 12px 0;
+      padding: 8px;
+      background: #4b4b4b;
+      border-radius: 8px;
     }
   </style>
+  <script>
+    function enterMenu() {
+      document.querySelector('.welcome').style.display = 'none';
+      document.querySelector('.menu-container').style.display = 'flex';
+    }
+    function showMenu(type) {
+      document.querySelectorAll('.menu-section').forEach(sec => sec.style.display = 'none');
+      document.getElementById(type).style.display = 'block';
+    }
+  </script>
 </head>
 <body>
-
-  <!-- هدر -->
-  <div class="hero">
-    <div class="hero-content">
-      <h1>Dr Coffee</h1>
-    </div>
+  <!-- صفحه خوشامد -->
+  <div class="welcome" onclick="enterMenu()">
+    <h1>Welcome to Dr.Coffee ☕</h1>
+    <p style="color:white; font-size:20px;">برای ورود کلیک کنید</p>
   </div>
 
-  <!-- منو بالا برای کلیک -->
-  <nav class="navbar">
-    <a href="#hot">بار گرم</a>
-    <a href="#cold">بار سرد</a>
-  </nav>
+  <!-- منو -->
+  <div class="menu-container">
+    <!-- دکمه‌های سمت راست -->
+    <div class="menu-titles">
+      <button class="menu-btn" onclick="showMenu('hot')">بار گرم ☕</button>
+      <button class="menu-btn" onclick="showMenu('cold')">بار سرد 🧊</button>
+    </div>
 
-  <!-- بخش منو -->
-  <div class="menu">
-
-    <!-- بار گرم -->
-    <div class="category" id="hot">
+    <!-- بخش نوشیدنی‌ها -->
+    <div id="hot" class="menu-section">
       <h2>بار گرم</h2>
-      <div class="items">
-        <div class="item">
-          <img src="https://via.placeholder.com/400x250?text=Espresso" alt="اسپرسو">
-          <div class="info">
-            <h3>اسپرسو</h3>
-            <p>قهوه خالص و پرانرژی</p>
-            <div class="price">۳۵,۰۰۰ تومان</div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="https://via.placeholder.com/400x250?text=Cappuccino" alt="کاپوچینو">
-          <div class="info">
-            <h3>کاپوچینو</h3>
-            <p>قهوه با شیر کف‌دار</p>
-            <div class="price">۴۸,۰۰۰ تومان</div>
-          </div>
-        </div>
-      </div>
+      <ul>
+        <li>اسپرسو</li>
+        <li>آمریکانو</li>
+        <li>کاپوچینو</li>
+        <li>لاته</li>
+      </ul>
     </div>
 
-    <!-- بار سرد -->
-    <div class="category" id="cold">
+    <div id="cold" class="menu-section">
       <h2>بار سرد</h2>
-      <div class="items">
-        <div class="item">
-          <img src="https://via.placeholder.com/400x250?text=Iced+Latte" alt="آیس لاته">
-          <div class="info">
-            <h3>آیس لاته</h3>
-            <p>شیر سرد با اسپرسو</p>
-            <div class="price">۵۵,۰۰۰ تومان</div>
-          </div>
-        </div>
-        <div class="item">
-          <img src="https://via.placeholder.com/400x250?text=Milkshake" alt="میلک‌شیک">
-          <div class="info">
-            <h3>میلک‌شیک شکلات</h3>
-            <p>نوشیدنی خنک با بستنی شکلاتی</p>
-            <div class="price">۶۵,۰۰۰ تومان</div>
-          </div>
-        </div>
-      </div>
+      <ul>
+        <li>آیس لاته</li>
+        <li>آیس موکا</li>
+        <li>فرپچینو</li>
+        <li>شیک شکلات</li>
+      </ul>
     </div>
-
   </div>
-
-  <footer>
-    © 2025 Dr Coffee — منوی دیجیتال
-  </footer>
-
 </body>
 </html>
